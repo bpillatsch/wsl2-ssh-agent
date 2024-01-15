@@ -63,6 +63,8 @@ func newConfig() *config {
 	flag.BoolVar(&c.stop, "stop", false, "stop the daemon and exit")
 	flag.BoolVar(&c.version, "version", false, "print version and exit")
 
+	flag.StringVar(&c.format, "format", "", "auto, bash, zsh, csh, tcsh, or fish")
+
 	flag.Usage = func() {
 		fmt.Fprintf(flag.CommandLine.Output(), "usage: wsl2-ssh-agent\n")
 		flag.PrintDefaults()
