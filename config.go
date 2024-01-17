@@ -71,8 +71,9 @@ func newConfig() *config {
 	}
 
 	flag.Parse()
+	fmt.Println(strings.Join(flag.Args(), ";"))
 
-	if c.powershellPath == "" {
+  if c.powershellPath == "" {
 		fmt.Fprintln(os.Stderr, "powershell.exe not found, use the -powershell-path to customize the path.")
 		os.Exit(1)
 	}
@@ -81,7 +82,8 @@ func newConfig() *config {
 }
 
 func getOutputFormat(format string) string {
-	if format == "auto" {
+  format = "auto"
+  if format == "auto" {
 		shell := os.Getenv("SHELL")
 		if strings.HasSuffix(shell, "fish") {
 			format = "fish"
@@ -99,6 +101,7 @@ func getOutputFormat(format string) string {
 	case "fish":
 		return "set -x SSH_AUTH_SOCK %s"
 	default:
+    fmt.Printf("format=" + format)
 		fmt.Printf("output format must be auto, bash, zsh, csh, tcsh, or fish\n")
 		os.Exit(1)
 		return ""
